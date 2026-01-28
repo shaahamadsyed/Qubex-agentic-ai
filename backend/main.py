@@ -16,14 +16,6 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Autonomous Choice Learning Agent")
 
-from fastapi.responses import Response
-from fastapi import Request
-
-@app.options("/{path:path}")
-async def preflight_handler(request: Request, path: str):
-    return Response(status_code=200)
-
-
 # CORS Setup (OK for local dev)
 origins = [
     "http://localhost:5173",

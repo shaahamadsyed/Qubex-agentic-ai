@@ -1,24 +1,26 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.database import engine, Base
-from backend.database import models # Import models to register them with Base
 from dotenv import load_dotenv
 import os
 
-# Load .env from the same directory as this file
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+# Load .env FIRST
+dotenv_path = os.path.join(os.path.dirname(__file__), ".env")
 load_dotenv(dotenv_path)
 
-# Create tables (simple auto-migration for now)
+# Import DB after env is loaded
+from backend.database.database import engine, Base
+from backend.database import models  # registers models
+
+# Create tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Autonomous Choice Learning Agent")
 
-# CORS Setup
+# CORS Setup (OK for local dev)
 origins = [
-    "http://localhost:5173", # Vite default
+    "http://localhost:5173",
     "http://localhost:3000",
+    "https://qubex-backend.onrender.com"
 ]
 
 app.add_middleware(
@@ -29,15 +31,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Routers
 from backend.routers import auth, chat, goals, calendar, notifications, profile
 
-
-app.include_router(auth.router)
-app.include_router(chat.router)
-app.include_router(goals.router)
-app.include_router(calendar.router)
-app.include_router(notifications.router)
-app.include_router(profile.router)
+app.include_router(auth.router, prefix="/auth")
+app.include_router(chat.router, prefix="/chat")
+app.include_router(goals.router, prefix="/goals")
+app.include_router(calendar.router, prefix="/calendar")
+app.include_router(notifications.router, prefix="/notifications")
+app.include_router(profile.router, prefix="/profile")
 
 @app.get("/")
 def read_root():

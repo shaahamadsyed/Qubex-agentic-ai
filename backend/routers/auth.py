@@ -51,7 +51,7 @@ from backend.database.models import User
 from backend.auth.security import get_password_hash, verify_password, create_access_token
 from pydantic import BaseModel
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(tags=["auth"])
 
 # Request and Response Models
 class UserCreate(BaseModel):

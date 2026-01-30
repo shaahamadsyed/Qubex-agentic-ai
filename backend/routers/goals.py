@@ -6,7 +6,7 @@ from backend.database.models import User, Goal
 from backend.auth.dependencies import get_current_user
 from pydantic import BaseModel
 
-router = APIRouter(prefix="/goals", tags=["goals"])
+router = APIRouter(tags=["goals"])
 
 class GoalCreate(BaseModel):
     text: str

@@ -7,7 +7,7 @@ from backend.auth.dependencies import get_current_user
 from pydantic import BaseModel
 from datetime import datetime
 
-router = APIRouter(prefix="/calendar", tags=["calendar"])
+router = APIRouter(tags=["calendar"])
 
 class EventResponse(BaseModel):
     id: int

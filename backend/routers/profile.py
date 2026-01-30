@@ -6,7 +6,7 @@ from backend.auth.dependencies import get_current_user
 from pydantic import BaseModel
 from typing import Optional
 
-router = APIRouter(prefix="/profile", tags=["profile"])
+router = APIRouter(tags=["profile"])
 
 class ProfileResponse(BaseModel):
     id: int

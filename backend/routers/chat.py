@@ -7,7 +7,7 @@ from backend.agent.brain import AgentBrain
 from pydantic import BaseModel
 from typing import List, Optional
 
-router = APIRouter(prefix="/chat", tags=["chat"])
+router = APIRouter(tags=["chat"])
 agent_brain = AgentBrain()
 
 class ChatSessionCreate(BaseModel):

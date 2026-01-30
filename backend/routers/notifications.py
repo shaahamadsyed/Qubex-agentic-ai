@@ -7,7 +7,7 @@ from backend.auth.dependencies import get_current_user
 from pydantic import BaseModel
 from datetime import datetime
 
-router = APIRouter(prefix="/notifications", tags=["notifications"])
+router = APIRouter(tags=["notifications"])
 
 class NotificationResponse(BaseModel):
     id: int
